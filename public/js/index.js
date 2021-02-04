@@ -24,7 +24,7 @@ async function check() {
             if (data.data[0]['link'].indexOf('http') == 0) {
                 location.replace(data.data[0]['link'])
             } else {
-                location.replace(protocol_red+data.data[0]['link'])
+                location.replace(protocol_red + data.data[0]['link'])
             }
         }
     }
@@ -63,9 +63,10 @@ check()
 async function create_link(event) {
     event.preventDefault();
 
-    function isValidUrl(url) {
-        var objRE = /(^https?:\/\/)?[a-z0-9~_\-\.]+\.[a-z]{2,9}(\/|:|\?[!-~]*)?$/i;
-        return objRE.test(url);
+    function isValidUrl(userInput) {
+        let regexQuery = "^(https?://)?(www\\.)?([-a-z0-9]{1,63}\\.)*?[a-z0-9][-a-z0-9]{0,61}[a-z0-9]\\.[a-z]{2,6}(/[-\\w@\\+\\.~#\\?&/=%]*)?$";
+        let url = new RegExp(regexQuery, "i");
+        return url.test(userInput);
     }
 
     if (!isValidUrl(document.querySelector('#link').value)) {
